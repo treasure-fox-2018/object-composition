@@ -35,6 +35,13 @@ class OtherCookie extends Cookie {
   }
 }
 
+class Ingredient {
+  constructor (namaBahan, jumlah) {
+    this.nama_bahan = namaBahan
+    this.jumlah_bahan = jumlah
+  }
+}
+
 class CookiFactory {
   static create (options) {
     let optionList = options
