@@ -23,7 +23,6 @@ class Cookie {
     return this._name;
   }
 
-
   bake() {
       this.status = "selesai dimasak";
   }
@@ -49,6 +48,21 @@ class OtherCookie extends Cookie {
     this.otherCount = 150;
   }
 }
+
+class ChocolateChipCrumbled extends ChocoChip {
+  constructor() {
+    super();
+    this._shape = "crumbled"
+  }
+}
+
+class PeanutButterCrumbled extends PeanutButter {
+  constructor() {
+    super();
+    this._shape = "crumbled"
+  }
+}
+
 
 class Ingredient {
   constructor(options) {
