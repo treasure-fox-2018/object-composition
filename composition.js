@@ -40,7 +40,7 @@ class CookieFactory {
     static create (options) {
         var cookiesArr = [];
         var cookiesList = fs.readFileSync('cookies.txt', 'utf8').split('\n');
-        for (let i = 0; i < cookiesList.length; i++) {
+        for (let i = 0; i < cookiesList.length-1; i++) {
             if (cookiesList[i] === 'peanut butter') {
                 var cookie = new PeanutButter(cookiesList[i]);
                 cookiesArr.push(cookie)
