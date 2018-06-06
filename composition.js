@@ -1,4 +1,5 @@
 "use strict"
+const fs = require ('fs')
 
 class Cookie{
     constructor(name){
@@ -33,27 +34,67 @@ class OtherCookie extends Cookie{
     }
 }
 
+class Ingredients{
+    constructor(){
+
+    }
+
+    
+
+
+}
+
 class CookieFactory{
-    static create(options){
-        let fs = require ('fs')
+
+    constructor(cookies){
+        this.cookies = []
+    }
+
+    createCookies(options){
         let dataString = fs.readFileSync('cookies.txt','UTF8')
         let dataArr = dataString.split('\n')
-        let cookiesBasket=[]
-        // console.log(dataArr)
         for(let i = 0; i<dataArr.length; i++){
             if(dataArr[i] === 'peanut butter'){
                 let peanutButter = new PeanutButter(dataArr[i])
-                cookiesBasket.push(peanutButter)
+                this.cookies.push(peanutButter)
             }else if(dataArr[i] === 'chocolate chip'){
                 let chocoChip = new ChocholateChip(dataArr[i])
-                cookiesBasket.push(chocoChip)
+                this.cookies.push(chocoChip)
             }else{
                 let otherCookie = new OtherCookie(dataArr[i])
-                cookiesBasket.push(otherCookie)
+                this.cookies.push(otherCookie)
             }
       }
-      console.log(cookiesBasket)
+    //   console.log(this.cookies[0].name)
+    return this.cookies
   }
+
+  createIngredients(options){
+    let dataString = fs.readFileSync('ingredients.txt','UTF8')
+    let dataArr = dataString.split('\n')
+    var ingredientsBasket = []
+    // console.log(this.cookies)
+    for(let i = 0 ; i<this.cookies.length; i++){
+        var dataIngredients = dataArr[i].split('=')
+        ingredientsBasket.push(dataIngredients)
+        if(this.cookies[i].name === 'peanut butter'){
+            this.cookies[i].ingredients.push(ingredientsBasket[i][1])                 
+        }else if(this.cookies[i].name === 'chocolate chip'){
+            this.cookies[i].ingredients.push(ingredientsBasket[i][1])
+        }else if(this.cookies[i].name === 'chocolate cheese'){
+            this.cookies[i].ingredients.push(ingredientsBasket[i][1])
+        }else if(this.cookies[i].name === 'chocolate butter'){
+            this.cookies[i].ingredients.push(ingredientsBasket[i][1])
+        }
+    }    
+    }
+
+  
 }
-console.log(CookieFactory.create())
+
+// console.log(Ingredients.create())
+let cookFactory = new CookieFactory()
+cookFactory.createCookies()
+cookFactory.createIngredients()
+console.log(cookFactory.cookies)
 
