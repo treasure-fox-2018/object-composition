@@ -22,12 +22,28 @@ class Ingredient {
     }
     return cookieNames;
   }
-  static getIngredients(){
+  static getIngredients(options){
     let cookieIngredients = []
     for (var i = 0; i < options.length - 1; i++) {
       cookieIngredients.push(options[i].split('=')[1].split(','))
     }
     return cookieIngredients;
+  }
+  static getComposition(options){
+    let cookieIngredients = []
+    for (var i = 0; i < options.length - 1; i++) {
+      cookieIngredients.push(options[i].split('=')[1].split(','))
+    }
+    // return cookieIngredients;
+    let compositions = []
+    for (let i = 0; i < cookieIngredients.length; i++) {
+      let composition = []
+      for (let j = 0; j < cookieIngredients[i].length; j++) {
+        composition.push(cookieIngredients[i][j].split(':')[1])
+      }
+      compositions.push(composition);
+    }
+    return compositions;
   }
 }
 
@@ -52,7 +68,7 @@ class OtherCookie extends Cookie {
 class CookieFactory {
   static create(options){
     let cookieBatch = [];
-    for (var i = 0; i < options.length - 1; i++) {
+    for (let i = 0; i < options.length - 1; i++) {
       let cookieName = Ingredient.getCookieName(options)[i];
       let cookieIngredient = Ingredient.getIngredients(options)[i];
       if (Ingredient.getCookieName(options)[i] == 'peanut butter') {
@@ -68,9 +84,27 @@ class CookieFactory {
     }
     return cookieBatch;
   }
+  static cookieRecomendation(day, batch){
+    let cookieNames = Ingredient.getCookieName(options)
+    let noSugarCookies = cookieNames;
+    for (let i = 0; i < batch.length; i++) {
+      let cookieComposition = Ingredient.getComposition(options)[i];
+      for (let j = 0; j < cookieComposition.length; j++) {
+        if (cookieComposition[j] === ' sugar') {
+          noSugarCookies.splice(0,1);
+        }
+      }
+    }
+    return noSugarCookies;
+  }
 }
 
 let batch_of_cookies = CookieFactory.create(options)
 console.log(batch_of_cookies);
+console.log(Ingredient.getComposition(options));
+let sugarFreeCookies = CookieFactory.cookieRecomendation('tuesday', batch_of_cookies)
 
-// console.log(Ingredient.getIngredients(options));
+console.log("sugar free cakes are:");
+for (var i = 0; i < sugarFreeCookies.length; i++) {
+  console.log(sugarFreeCookies[i]);
+}
