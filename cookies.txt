@@ -1,4 +1,5 @@
-peanut butter
-chocolate chip
-chocolate cheese
-chocolate butter
+peanut butter = flour : 1 cup, sugar : 2 cups, peanut butter : 1 cup, butter : 2 tbsp
+chocolate chip = flour : 1 cup, sugar : 1 cup, choco chips : 1 cup, butter : 2 tbsp
+chocolate cheese = flour : 1 cup, sugar : 2 cups, cheese : 1 cup, chocolate : 1 cup, butter : 2 tbsp
+chocolate butter = flour : 1 cup, sugar : 2 cups, chocolate : 2 cups, butter : 2 tbsp
+cheese butter = flour : 1 cup, cheese : 2 cups, butter : 2 tbsp 
